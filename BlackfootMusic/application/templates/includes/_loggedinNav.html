@@ -1,0 +1,23 @@
+<nav id="nav" class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="{{url_for('logout')}}">Blackfoot Music</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('logout')}}"> Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+            </li>
+          </ul>
+          <div class="spacerLogout"></div>
+    <ul class="nav navbar-nav navbar-right">
+      <li  class="nav-item">
+      <a type="button" id="logout" class="btn btn-danger" href="{{url_for('logout')}}"> Logout </a>
+    </ul>
+  </div>
+        </div>
+    </nav>
+      

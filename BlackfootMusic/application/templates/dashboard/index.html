@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<br/>
+<br/>
+<div style="background-color:#303133 !important; border-radius: 120px;" class="jumbotron text-center">
+<h1 style="color: white;"> Blackfoot school district music department</h1>
+<p class="lead" style="color: yellow";>Welcome to Blackfoot elementaries music management system</p>
+</div>
+<div class="center-div">
+<div class="teacher">
+<p>If you are a teacher please click this button</p>
+<div class="teacherButton">
+  <a type="button" href="{{ url_for('teacher.teacherLogin') }}" class="button purple">Teacher login</a>
+</div>
+</div>
+<div class="spacer"></div>
+<div class="parent">
+<p>If you are a parent please click this button</p>
+<div class ="parentButton">
+<a type="button" href="{{ url_for('parent.parentLogin') }}" class="button purple">Parent login</a>
+</div>
+</div>
+</div>
+{% endblock %}

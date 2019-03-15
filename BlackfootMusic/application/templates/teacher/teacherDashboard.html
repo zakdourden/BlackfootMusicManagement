@@ -1,0 +1,34 @@
+{% extends 'loggedin.html' %}
+{% block body %}
+  <h1>Dashboard <small> Welcome {{session.username}}</small></h1>
+  <hr>
+  <table class="table table-striped table-dark">
+    <tr>
+      <th>StudentID</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Instrument</th>
+      <th>Parent First Name</th>
+      <th>Parent Last Name</th>
+      <th>Parent Email</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+    {% for data in studentInfo %}
+      <tr>
+        <td>{{data.StudentID}}</td>
+        <td>{{data.StudentFname}}</td>
+        <td>{{data.StudentLname}}</td>
+        <td>{{data.InstrumentName}}</td>
+        <td>{{data.ParentFname}}</td>
+        <td>{{data.parentLname}}</td>
+        <td>{{data.parentEmail}}</td>
+        <td><a href="#" class="btn btn-default pull-right">Edit</a></td>
+        <td><form action="#" method="post">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="submit" value="Delete" class="btn btn-danger">
+          </form></td>
+      </tr>
+    {% endfor %}
+  </table>
+{% endblock %}
