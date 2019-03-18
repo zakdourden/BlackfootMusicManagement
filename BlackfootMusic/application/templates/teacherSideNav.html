@@ -24,15 +24,24 @@
             <div class="dropdown">
                     <button class="dropbtn">Sort Students By&nbsp;&downarrow;</button>
                     <div class="dropdown-content">
-                      <a href="#">Kindergarden</a>
-                      <a href="#">First Garde</a>
-                      <a href="#">Second Grade</a>
-                      <a href="#">Third Grade</a>
-                      <a href="#">Fourth Grade</a>
-                      <a href="#">Fith Grade</a>
-                      <a href="#">Sixth Grade</a>
+                      <a href="{{url_for('teacher.teacherDashboardSortk')}}">Kindergarten</a>
+                      <a href="{{url_for('teacher.teacherDashboardSort1')}}">First Garde</a>
+                      <a href="{{url_for('teacher.teacherDashboardSort2')}}">Second Grade</a>
+                      <a href="{{url_for('teacher.teacherDashboardSort3')}}">Third Grade</a>
+                      <a href="{{url_for('teacher.teacherDashboardSort4')}}">Fourth Grade</a>
+                      <a href="{{url_for('teacher.teacherDashboardSort5')}}">Fith Grade</a>
+                      <a href="{{url_for('teacher.teacherDashboardSort6')}}">Sixth Grade</a>
                     </div>
                   </div>
+                  <hr>
+                  <a style="color:white;" href="#"><p>Create New Student&nbsp;</p></a>
+                  <hr>
+                  <a style="color:white;" href="#"><p>Create New Parent  &nbsp;</p></a>
+                  <hr>
+                  <a style="color:white;" href="#"><p>Create New Teacher&nbsp;</p></a>
+                  <hr>
+                  <a style="color:white;" href="{{url_for('teacher.teacherDashboard')}}"><p>Return to dashboard&nbsp;&lAarr;</p></a>
+                  <hr>
         </div>
         <div class="container">
                 {% include 'includes/_messages.html' %}

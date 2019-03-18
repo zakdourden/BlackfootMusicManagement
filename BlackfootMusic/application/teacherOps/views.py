@@ -77,3 +77,120 @@ def teacherDashboard():
     # Close connection
     cur.close()
     return('teacher/teacherDashboard.html')
+################################################################################
+# Teacher: Begin student sorting k-6
+################################################################################
+@teacher.route('/teacherDashboardSortk')
+@is_logged_in_with_permission
+def teacherDashboardSortk():
+    cur = mysql.connection.cursor()
+    result = cur.execute("SELECT *FROM student s JOIN instrument i ON s.Instrument_InstrumentID = i.InstrumentID JOIN gradelevel g ON s.Gradelevel_GradelevelID = g.GradelevelID JOIN teacher t ON s.Teacher_TeacherID = t.TeacherID JOIN parentstudent ps on ps.Student_StudentID  = s. StudentID JOIN parent q ON ps.Parent_ParentID = q.ParentID WHERE g.gradelevel ='kindergarten';")
+    studentInfo = cur.fetchall()
+
+    if result > 0:
+        return render_template('teacher/teacherDashboard.html', studentInfo=studentInfo)
+    else:
+        message = 'No db entries found Found'
+        return render_template('teacher/teacherDashboard.html', message=message)
+    # Close connection
+    cur.close()
+    return('teacher/teacherDashboard.html')
+
+@teacher.route('/teacherDashboardSort1')
+@is_logged_in_with_permission
+def teacherDashboardSort1():
+    cur = mysql.connection.cursor()
+    result = cur.execute("SELECT *FROM student s JOIN instrument i ON s.Instrument_InstrumentID = i.InstrumentID JOIN gradelevel g ON s.Gradelevel_GradelevelID = g.GradelevelID JOIN teacher t ON s.Teacher_TeacherID = t.TeacherID JOIN parentstudent ps on ps.Student_StudentID  = s. StudentID JOIN parent q ON ps.Parent_ParentID = q.ParentID WHERE g.gradelevel ='first';")
+    studentInfo = cur.fetchall()
+
+    if result > 0:
+        return render_template('teacher/teacherDashboard.html', studentInfo=studentInfo)
+    else:
+        message = 'No db entries found Found'
+        return render_template('teacher/teacherDashboard.html', message=message)
+    # Close connection
+    cur.close()
+    return('teacher/teacherDashboard.html')
+
+@is_logged_in_with_permission
+@teacher.route('/teacherDashboardSort2')
+def teacherDashboardSort2():
+    cur = mysql.connection.cursor()
+    result = cur.execute("SELECT *FROM student s JOIN instrument i ON s.Instrument_InstrumentID = i.InstrumentID JOIN gradelevel g ON s.Gradelevel_GradelevelID = g.GradelevelID JOIN teacher t ON s.Teacher_TeacherID = t.TeacherID JOIN parentstudent ps on ps.Student_StudentID  = s. StudentID JOIN parent q ON ps.Parent_ParentID = q.ParentID WHERE g.gradelevel ='second';")
+    studentInfo = cur.fetchall()
+
+    if result > 0:
+        return render_template('teacher/teacherDashboard.html', studentInfo=studentInfo)
+    else:
+        message = 'No db entries found Found'
+        return render_template('teacher/teacherDashboard.html', message=message)
+    # Close connection
+    cur.close()
+    return('teacher/teacherDashboard.html')
+
+@is_logged_in_with_permission
+@teacher.route('/teacherDashboardSort3')
+def teacherDashboardSort3():
+    cur = mysql.connection.cursor()
+    result = cur.execute("SELECT *FROM student s JOIN instrument i ON s.Instrument_InstrumentID = i.InstrumentID JOIN gradelevel g ON s.Gradelevel_GradelevelID = g.GradelevelID JOIN teacher t ON s.Teacher_TeacherID = t.TeacherID JOIN parentstudent ps on ps.Student_StudentID  = s. StudentID JOIN parent q ON ps.Parent_ParentID = q.ParentID WHERE g.gradelevel ='third';")
+    studentInfo = cur.fetchall()
+
+    if result > 0:
+        return render_template('teacher/teacherDashboard.html', studentInfo=studentInfo)
+    else:
+        message = 'No db entries found Found'
+        return render_template('teacher/teacherDashboard.html', message=message)
+    # Close connection
+    cur.close()
+    return('teacher/teacherDashboard.html')
+
+@is_logged_in_with_permission
+@teacher.route('/teacherDashboardSort4')
+def teacherDashboardSort4():
+    cur = mysql.connection.cursor()
+    result = cur.execute("SELECT *FROM student s JOIN instrument i ON s.Instrument_InstrumentID = i.InstrumentID JOIN gradelevel g ON s.Gradelevel_GradelevelID = g.GradelevelID JOIN teacher t ON s.Teacher_TeacherID = t.TeacherID JOIN parentstudent ps on ps.Student_StudentID  = s. StudentID JOIN parent q ON ps.Parent_ParentID = q.ParentID WHERE g.gradelevel ='fourth';")
+    studentInfo = cur.fetchall()
+
+    if result > 0:
+        return render_template('teacher/teacherDashboard.html', studentInfo=studentInfo)
+    else:
+        message = 'No db entries found Found'
+        return render_template('teacher/teacherDashboard.html', message=message)
+    # Close connection
+    cur.close()
+    return('teacher/teacherDashboard.html')
+
+@is_logged_in_with_permission
+@teacher.route('/teacherDashboardSort5')
+def teacherDashboardSort5():
+    cur = mysql.connection.cursor()
+    result = cur.execute("SELECT *FROM student s JOIN instrument i ON s.Instrument_InstrumentID = i.InstrumentID JOIN gradelevel g ON s.Gradelevel_GradelevelID = g.GradelevelID JOIN teacher t ON s.Teacher_TeacherID = t.TeacherID JOIN parentstudent ps on ps.Student_StudentID  = s. StudentID JOIN parent q ON ps.Parent_ParentID = q.ParentID WHERE g.gradelevel ='fifth';")
+    studentInfo = cur.fetchall()
+
+    if result > 0:
+        return render_template('teacher/teacherDashboard.html', studentInfo=studentInfo)
+    else:
+        message = 'No db entries found Found'
+        return render_template('teacher/teacherDashboard.html', message=message)
+    # Close connection
+    cur.close()
+    return('teacher/teacherDashboard.html')    
+
+@is_logged_in_with_permission
+@teacher.route('/teacherDashboardSort6')
+def teacherDashboardSort6():
+    cur = mysql.connection.cursor()
+    result = cur.execute("SELECT *FROM student s JOIN instrument i ON s.Instrument_InstrumentID = i.InstrumentID JOIN gradelevel g ON s.Gradelevel_GradelevelID = g.GradelevelID JOIN teacher t ON s.Teacher_TeacherID = t.TeacherID JOIN parentstudent ps on ps.Student_StudentID  = s. StudentID JOIN parent q ON ps.Parent_ParentID = q.ParentID WHERE g.gradelevel ='sixith';")
+    studentInfo = cur.fetchall()
+
+    if result > 0:
+        return render_template('teacher/teacherDashboard.html', studentInfo=studentInfo)
+    else:
+        message = 'No db entries found Found'
+        return render_template('teacher/teacherDashboard.html', message=message)
+    # Close connection
+    cur.close()
+    return('teacher/teacherDashboard.html')    
+################################################################################
+# Teacher: Editing students and deleting them
+################################################################################
