@@ -28,6 +28,8 @@ def teacherLogin():
 
                 session['TeacherUsername'] = username
                 session['logged_in'] = True
+                session['permissionLevel'] = 'teacher'
+                session['parentID'] = None
 
                 flash('Login was succesful', 'success')
                 return redirect(url_for('teacher.teacherDashboard'))
@@ -41,10 +43,27 @@ def teacherLogin():
             return render_template('teacher/teacherLogin.html', error=error)
 
     return render_template('teacher/teacherLogin.html')
+###############################################################################
+# Teacher: Check permissions
+###############################################################################
+def is_logged_in_with_permission(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if 'logged_in' in session:
+            if session['permissionLevel'] == 'teacher' or session['permissionLevel'] == 'admin':
+                return f(*args, **kwargs)
+            elif session['permissionLevel'] == 'parent':
+                flash('You do not have the right permissions!','danger')
+                return redirect(url_for('index'))
+        else:
+            flash('Unauthorized, Please login', 'danger')
+            return redirect(url_for('index'))
+    return wrap
 ################################################################################
 # Teacher: Teacher Dashboard
 ################################################################################
 @teacher.route('/teacherDashboard')
+@is_logged_in_with_permission
 def teacherDashboard():
     cur = mysql.connection.cursor()
     result = cur.execute("SELECT * FROM student s JOIN instrument i ON s.Instrument_InstrumentID = i.InstrumentID JOIN parentstudent ps on ps.Student_StudentID = s. StudentID JOIN parent t ON ps.Parent_ParentID = t.ParentID;")

@@ -37,33 +37,10 @@ app.register_blueprint(parentOps.views.parent)
 def index():
    return render_template('dashboard/index.html')
 
+
 @app.route('/logout')
 def logout():
    if session['logged_in'] == True:
       session.clear()
       flash("You are now logged out", 'success')
       return redirect(url_for('index'))
-
-def is_logged_in(f):
-    @wraps(f)
-    def wrap(*args, **kwargs):
-        if 'logged_in' in session:
-            return f(*args, **kwargs)
-        else:
-            flash('Unauthorized, Please login', 'danger')
-            return redirect(url_for('index'))
-    return wrap
-
-def is_logged_in_with_permission(f):
-    @wraps(f)
-    def wrap(*args, **kwargs):
-        if 'logged_in' in session:
-            if session['permissionLevel'] == 'teacher' or session['permissionLevel'] == 'admin':
-                return f(*args, **kwargs)
-            else:
-                flash('You do not have the right permissions!','danger')
-                return redirect(url_for('index'))
-        else:
-            flash('Unauthorized, Please login', 'danger')
-            return redirect(url_for('index'))
-    return wrap

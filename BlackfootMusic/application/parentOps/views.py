@@ -31,6 +31,7 @@ def parentLogin():
                 session['username'] = username
                 session['parentID'] = parentID
                 session['firstName'] = firstName
+                session['permissionLevel'] = 'parent'
 
                 flash('Login was succesful', 'success')
                 return redirect(url_for('parent.parentDashboard', parentID=parentID))
@@ -44,17 +45,33 @@ def parentLogin():
             return render_template('parent/parentLogin.html', error=error)
 
     return render_template('parent/parentLogin.html')
+##############################################################################
+# Check login status
+##############################################################################
+def is_logged_in(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if 'logged_in' in session:
+            return f(*args, **kwargs)
+        else:
+            flash('Unauthorized, Please login', 'danger')
+            return redirect(url_for('index'))
+    return wrap
 ###############################################################################
 # Parent: student Query
 ###############################################################################
 @parent.route('/parentDashboard')
+@is_logged_in
 def parentDashboard():
     parentID = session['parentID']
+    if parentID == None:
+        flash('Unauthorized, Please login', 'danger')
+        return redirect(url_for('index'))
     cur = mysql.connection.cursor()
     cur.execute("SELECT *FROM student s JOIN instrument i ON s.Instrument_InstrumentID = i.InstrumentID JOIN gradelevel g ON s.Gradelevel_GradelevelID = g.GradelevelID JOIN teacher t ON s.Teacher_TeacherID = t.TeacherID JOIN parentstudent ps on ps.Student_StudentID = s. StudentID WHERE parent_parentid = %s",[parentID])
     data = cur.fetchall()
     if data is None:
         error = 'Could not return any students with your id'
-        return error
+        return render_template('parent/parentLogin.html')
     cur.close()
     return render_template('parent/parentDashboard.html',data=data)
