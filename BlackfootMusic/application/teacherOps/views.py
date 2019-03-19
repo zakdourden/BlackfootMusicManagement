@@ -41,7 +41,7 @@ def teacherLogin():
 
             cur.close()
         else:
-            error = 'Unexpected error occured'
+            error = 'Not authorized, error'
             return render_template('teacher/teacherLogin.html', error=error)
 
     return render_template('teacher/teacherLogin.html')
@@ -199,10 +199,25 @@ def teacherDashboardSort6():
 @teacher.route('/teacherDashboardCheckInventory')
 def teacherDashboardCheckInventory():
     cur = mysql.connection.cursor()
-    result = cur.execute("SELECT * FROM instrument i LEFT OUTER JOIN student s ON s.studentID = i.instrumentID;;")
+    result = cur.execute("SELECT * FROM instrument i LEFT OUTER JOIN student s ON s.studentID = i.instrumentID;")
     instrumentInfo = cur.fetchall()
     if result > 0:
         return render_template('teacher/instrumentInventory.html', instrumentInfo=instrumentInfo)
+    else:
+        message = 'No db entries found Found'
+        return render_template('teacher/teacherDashboard.html', message=message)
+    # Close connection
+    cur.close()
+    return('teacher/teacherDashboard.html')    
+
+@is_logged_in_with_permission
+@teacher.route('/teacherDashboardCheckParent')
+def teacherDashboardCheckParent():
+    cur = mysql.connection.cursor()
+    result = cur.execute("SELECT * FROM parent;")
+    parentInfo = cur.fetchall()
+    if result > 0:
+        return render_template('teacher/checkParent.html', parentInfo=parentInfo)
     else:
         message = 'No db entries found Found'
         return render_template('teacher/teacherDashboard.html', message=message)

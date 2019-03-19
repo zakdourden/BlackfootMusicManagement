@@ -1,0 +1,13 @@
+{% extends 'loggedin.html' %}
+
+{% block body %}
+<h1>Add a student</h1>
+<br>
+{% from "includes/_formhelpers.html" import render_field %}
+<form method="post" action="">
+  <div class="form-group">
+    {{render_field(form.StudentID, class_="form-control")}}
+  </div>
+  <p><input type="submit" class="btn btn-primary" value="submit"></p>
+  </form>
+  {% endblock %}

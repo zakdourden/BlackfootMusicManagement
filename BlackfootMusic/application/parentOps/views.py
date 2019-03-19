@@ -4,6 +4,7 @@ from wtforms import Form, StringField, TextAreaField, PasswordField, validators,
 from passlib.hash import sha256_crypt
 from functools import wraps
 from application import mysql
+from application.parentOps.forms import ParentRegisterForm, RegisterStudentForm
 ################################################################################
 # Section: Flask Configuration
 # Operations that enable flask to work.
@@ -75,3 +76,60 @@ def parentDashboard():
         return render_template('parent/parentLogin.html')
     cur.close()
     return render_template('parent/parentDashboard.html',data=data)
+
+###############################################################################
+# Parent: Allow parent to create an account.
+###############################################################################
+@parent.route('/parentRegister', methods=['Get','Post'])
+def parentRegister():
+    form = ParentRegisterForm(request.form)
+    if request.method == 'POST' and form.validate():
+        ParentID = form.ParentID.data
+        firstName = form.firstName.data
+        lastName = form.lastName.data
+        email = form.email.data
+        username = form.username.data
+        password = sha256_crypt.encrypt(str(form.password.data))
+
+        # create cursor
+        cur = mysql.connection.cursor()
+
+        checkUsername = cur.execute("SELECT * FROM parent WHERE Parentusername = %s", [username])
+        if checkUsername > 0:
+            flash('Username has been taken, please enter a unique username', 'danger')
+            return render_template('parent/parentLogin.html')
+        elif checkUsername == 0:
+            cur.execute("INSERT INTO parent(parentFname, parentLname, parentEmail, ParentID, Parentusername, ParentPassword) VALUES(%s,%s,%s,%s,%s,%s)", (firstName, lastName, email, ParentID, username, password))
+            #%d does represent a number however it will throw an error if used with a small number.
+        #commit to finish
+        mysql.connection.commit()
+
+        #close connection
+        cur.close()
+        flash('You are now registered and can view your students instrument check out information', 'success')
+        return redirect(url_for('parentLogin'))
+    return render_template('parent/parentRegister.html', form=form)
+###############################################################################
+# Parent: Allow parent add a student to their account.
+###############################################################################
+@parent.route('/ParentDashboardRegisterStudent', methods=['Get','Post'])
+@is_logged_in
+def parentAddStudent():
+    parentID = session['parentID']
+    form = RegisterStudentForm(request.form)
+    if request.method == 'POST' and form.validate():
+        StudentID = form.StudentID.data
+        cur = mysql.connection.cursor()
+        checkStudentID = cur.execute("SELECT * FROM student WHERE StudentID = %s", [StudentID])
+        if checkStudentID > 0:
+            results = cur.execute("INSERT INTO parentstudent(Student_StudentID, Parent_ParentID) VALUES(%s,%s)", (StudentID, parentID))
+            mysql.connection.commit()
+            cur.close()
+            flash('Student added', 'success')
+            return render_template('parent/parentDashboard.html')
+        else:
+            cur.close()
+            flash('No student was found with id ' + str(StudentID))
+            return render_template('parent/parentDashboard.html')
+    return render_template('parent/parentAddStudent.html', form=form)
+    
