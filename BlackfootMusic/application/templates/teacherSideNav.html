@@ -34,6 +34,8 @@
                     </div>
                   </div>
                   <hr>
+                  <a style="color:white;" href="{{url_for('teacher.teacherDashboardCheckInventory')}}"><p>Check Inventory&nbsp;</p></a>
+                  <hr>
                   <a style="color:white;" href="#"><p>Create New Student&nbsp;</p></a>
                   <hr>
                   <a style="color:white;" href="#"><p>Create New Parent  &nbsp;</p></a>
@@ -42,11 +44,12 @@
                   <hr>
                   <a style="color:white;" href="{{url_for('teacher.teacherDashboard')}}"><p>Return to dashboard&nbsp;&lAarr;</p></a>
                   <hr>
+                  
         </div>
-        <div class="container">
+        <div class="contain">
                 {% include 'includes/_messages.html' %}
         {% block body %}
-
+        
         {% endblock %}
         </div>
     </div>

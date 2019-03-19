@@ -23,6 +23,10 @@ body{
     height:25%;
 }
 
+.container{
+  overflow: auto;
+}
+
 .center-div{
   display: flex;
   align-content: center;

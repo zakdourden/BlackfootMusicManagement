@@ -24,12 +24,14 @@ def teacherLogin():
             data = cur.fetchone()
             password = data['TeacherPassword']
             parentID = data['TeacherID']
+            firstName = data['TeacherFname']
             if sha256_crypt.verify(formPassword,password):
 
                 session['TeacherUsername'] = username
                 session['logged_in'] = True
                 session['permissionLevel'] = 'teacher'
                 session['parentID'] = None
+                session['name'] = firstName
 
                 flash('Login was succesful', 'success')
                 return redirect(url_for('teacher.teacherDashboard'))
@@ -79,6 +81,7 @@ def teacherDashboard():
     return('teacher/teacherDashboard.html')
 ################################################################################
 # Teacher: Begin student sorting k-6
+# Check inventory is also part of theis section.
 ################################################################################
 @teacher.route('/teacherDashboardSortk')
 @is_logged_in_with_permission
@@ -185,6 +188,21 @@ def teacherDashboardSort6():
 
     if result > 0:
         return render_template('teacher/teacherDashboard.html', studentInfo=studentInfo)
+    else:
+        message = 'No db entries found Found'
+        return render_template('teacher/teacherDashboard.html', message=message)
+    # Close connection
+    cur.close()
+    return('teacher/teacherDashboard.html')    
+
+@is_logged_in_with_permission
+@teacher.route('/teacherDashboardCheckInventory')
+def teacherDashboardCheckInventory():
+    cur = mysql.connection.cursor()
+    result = cur.execute("SELECT * FROM instrument i LEFT OUTER JOIN student s ON s.studentID = i.instrumentID;;")
+    instrumentInfo = cur.fetchall()
+    if result > 0:
+        return render_template('teacher/instrumentInventory.html', instrumentInfo=instrumentInfo)
     else:
         message = 'No db entries found Found'
         return render_template('teacher/teacherDashboard.html', message=message)

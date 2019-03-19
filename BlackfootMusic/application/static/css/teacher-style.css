@@ -40,6 +40,17 @@ html{
     position: relative;
     display: inline-block;
   }
+
+  .space{
+    height:100%;
+    width:5%;
+  }
+
+  .contain{
+    text-align: center;
+    overflow: auto;
+    width:100%;
+  }
   
   .purple
   {

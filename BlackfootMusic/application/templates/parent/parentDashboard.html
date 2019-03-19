@@ -3,29 +3,32 @@
 {% block body %}
 
 <br>
-  <h3> Hello {{session.username}} ! </h3>
+  <h3> Hello {{session.firstName}} ! </h3>
+  <p>Your students information is below&darr;</p>
   <hr>
 
   {% for row in data %}
   <table class="table table-striped table-dark">
   <thead>
     <tr>
-      <th scope="col">#</th>
       <th scope="col">StudentID</th>
       <th scope="col">First name</th>
       <th scope="col">Last Name</th>
       <th scope="col">Instrument</th>
+      <th scope="col">Check Out Date</th>
+      <th scope="col">Retun Date</th>
       <th scope="col">Grade</th>
       <th scope="col">Teacher</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th scope="row">1</th>
       <td>{{ row['StudentID'] }}</td>
       <td>{{ row['StudentFname'] }}</td>
       <td>{{ row['StudentLname'] }}</td>
       <td>{{ row['InstrumentName'] }}</td>
+      <td>{{ row['CheckOutDate'] }}</td>
+      <td>{{ row['ReturnDate'] }}</td>
       <td>{{ row['GradeLevel'] }}</td>
       <td>{{ row['TeacherFname'] }}</td>
     </tr>
