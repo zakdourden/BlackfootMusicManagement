@@ -224,6 +224,38 @@ def teacherDashboardCheckParent():
     # Close connection
     cur.close()
     return('teacher/teacherDashboard.html')    
+
+@is_logged_in_with_permission
+@teacher.route('/teacherDashboardSortDueDate')
+def teacherDashboardDueDate():
+    cur = mysql.connection.cursor()
+    result = cur.execute("SELECT * FROM student s JOIN instrument i ON s.Instrument_InstrumentID = i.InstrumentID JOIN parentstudent ps on ps.Student_StudentID = s. StudentID JOIN parent t ON ps.Parent_ParentID = t.ParentID order by ReturnDate ASC;")
+    studentInfo = cur.fetchall()
+
+    if result > 0:
+        return render_template('teacher/teacherDashboard.html', studentInfo=studentInfo)
+    else:
+        message = 'No db entries found Found'
+        return render_template('teacher/teacherDashboard.html', message=message)
+    # Close connection
+    cur.close()
+    return('teacher/teacherDashboard.html')
+
+@is_logged_in_with_permission
+@teacher.route('/teacherDashboardSortRecent')
+def teacherDashboardSortRecent():
+    cur = mysql.connection.cursor()
+    result = cur.execute("SELECT * FROM student s JOIN instrument i ON s.Instrument_InstrumentID = i.InstrumentID JOIN parentstudent ps on ps.Student_StudentID = s. StudentID JOIN parent t ON ps.Parent_ParentID = t.ParentID order by ReturnDate DESC;")
+    studentInfo = cur.fetchall()
+
+    if result > 0:
+        return render_template('teacher/teacherDashboard.html', studentInfo=studentInfo)
+    else:
+        message = 'No db entries found Found'
+        return render_template('teacher/teacherDashboard.html', message=message)
+    # Close connection
+    cur.close()
+    return('teacher/teacherDashboard.html')
 ################################################################################
 # Teacher: Editing students and deleting them
 ################################################################################
