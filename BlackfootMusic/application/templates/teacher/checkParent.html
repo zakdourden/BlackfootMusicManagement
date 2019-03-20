@@ -2,7 +2,8 @@
 {% block body %}
   <h1>Dashboard <small> Welcome {{session.name}}</small></h1>
   <hr>
-  <table class="table table-striped table-dark">
+  <input type="text" id="myInput" onkeyup="searchBar()" placeholder="&#x1F50D; Search for first names.." title="Type in a name">
+  <table id="myTable" class="table table-striped table-dark">
     <tr>
       <th scope="col">ParentID</th>
       <th scope="col">First Name</th>
@@ -15,8 +16,8 @@
     {% for data in parentInfo %}
       <tr>
         <td>{{data.ParentID}}</td>
-        <td>{{data.ParentFname}}</td>
-        <td>{{data.parentLname}}</td>
+        <td class="name">{{data.ParentFname}}</td>
+        <td class="name">{{data.parentLname}}</td>
         <td>{{data.parentEmail}}</td>
         <td>{{data.Parentusername}}</td>
         <td><a href="#" class="btn btn-default pull-right">Edit</a></td>
