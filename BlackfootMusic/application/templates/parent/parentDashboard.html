@@ -30,12 +30,13 @@
       <td>{{ row['CheckOutDate'] }}</td>
       <td>{{ row['ReturnDate'] }}</td>
       <td>{{ row['GradeLevel'] }}</td>
-      <td>{{ row['TeacherFname'] }}</td>
+      <td>{{ row['TeacherFname'] }} {{ row['TeacherLname'] }}</td>
     </tr>
   </tbody>
 </table>
 {% endfor %}
-
+<hr>
+<br>
 <a type="button" class="btn btn-primary" href="{{url_for('parent.parentAddStudent')}}">Click here to add a student +</a>
 
 {% endblock %}

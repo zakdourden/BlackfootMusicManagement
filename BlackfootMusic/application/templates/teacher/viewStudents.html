@@ -1,0 +1,31 @@
+{% extends 'teacherSideNav.html' %}
+{% block body %}
+  <h1>Dashboard <small> Welcome {{session.name}}</small></h1>
+  <hr>
+  <input type="text" id="myInput" onkeyup="searchBar()" placeholder="&#x1F50D; Search for first names.." title="Type in a name">
+  <table id="myTable" class="table table-striped table-dark">
+    <tr>
+      <th scope="col">StudentID</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Grade</th>
+      <th scope="col">teacher</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    </tr>
+    {% for data in studentInfo %}
+      <tr>
+        <td>{{data.StudentID}}</td>
+        <td class="name">{{data.StudentFname}}</td>
+        <td class="name">{{data.StudentLname}}</td>
+        <td>{{data.GradeLevel}}</td>
+        <td>{{data.TeacherFname}} {{data.TeacherLname}}</td>
+        <td><a href="#" class="btn btn-default pull-right">Edit</a></td>
+        <td><form action="#" method="post">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="submit" value="Delete" class="btn btn-danger">
+          </form></td>
+      </tr>
+    {% endfor %}
+  </table>
+{% endblock %}

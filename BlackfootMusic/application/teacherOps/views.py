@@ -256,6 +256,22 @@ def teacherDashboardSortRecent():
     # Close connection
     cur.close()
     return('teacher/teacherDashboard.html')
+
+@teacher.route('/teacherDashboardViewAllStudents')
+@is_logged_in_with_permission
+def teacherDashboardViewAllStudents():
+    cur = mysql.connection.cursor()
+    result = cur.execute("SELECT *FROM student s JOIN teacher i ON s.Teacher_TeacherID = i.teacherID JOIN gradelevel g ON s.Gradelevel_GradelevelID = g.GradelevelID;")
+    studentInfo = cur.fetchall()
+
+    if result > 0:
+        return render_template('teacher/viewStudents.html', studentInfo=studentInfo)
+    else:
+        message = 'No db entries found Found'
+        return render_template('teacher/teacherDashboard.html', message=message)
+    # Close connection
+    cur.close()
+    return('teacher/teacherDashboard.html')
 ################################################################################
 # Teacher: Editing students and deleting them
 ################################################################################
