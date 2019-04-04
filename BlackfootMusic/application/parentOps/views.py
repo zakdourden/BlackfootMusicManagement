@@ -26,12 +26,14 @@ def parentLogin():
             password = data['ParentPassword']
             parentID = data['ParentID']
             firstName = data['ParentFname']
+            email = data['parentEmail']
             if sha256_crypt.verify(formPassword,password):
 
                 session['logged_in'] = True
                 session['username'] = username
                 session['parentID'] = parentID
                 session['firstName'] = firstName
+                session['email'] = email
                 session['permissionLevel'] = 'parent'
 
                 flash('Login was succesful', 'success')
@@ -95,10 +97,14 @@ def parentRegister():
         cur = mysql.connection.cursor()
 
         checkUsername = cur.execute("SELECT * FROM parent WHERE Parentusername = %s", [username])
+        checkEmail = cur.execute("SELECT * FROM parent WHERE parentEmail =%s", [email])
         if checkUsername > 0:
             flash('Username has been taken, please enter a unique username', 'danger')
             return render_template('parent/parentLogin.html')
-        elif checkUsername == 0:
+        elif checkEmail > 0:
+            flash('Email is already registered to an account, if you have forgotten your password please send an email to Easton@gmail.com', 'danger')
+            return render_template('parent/parentLogin.html')
+        elif checkUsername == 0 and checkEmail == 0:
             cur.execute("INSERT INTO parent(parentFname, parentLname, parentEmail, ParentID, Parentusername, ParentPassword) VALUES(%s,%s,%s,%s,%s,%s)", (firstName, lastName, email, ParentID, username, password))
             #%d does represent a number however it will throw an error if used with a small number.
         #commit to finish
