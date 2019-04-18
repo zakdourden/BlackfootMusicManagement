@@ -19,7 +19,7 @@ app.config['SECRET_KEY'] = 'super secret key'
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'password'
-app.config['MYSQL_DB'] = 'mydb'
+app.config['MYSQL_DB'] = 'blackfoot'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 mysql = MySQL(app)
 ################################################################################

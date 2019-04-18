@@ -1,0 +1,24 @@
+{% extends 'teacherSideNav.html' %}
+{% block body %}
+  <h1>Dashboard <small> Welcome {{session.name}}</small></h1>
+  <hr>
+  <input type="text" id="myInput" onkeyup="searchBar()" placeholder="&#x1F50D; Search for first names.." title="Type in a name">
+  <table id="myTable" class="table table-striped table-dark">
+    <tr>
+      <th scope="col">TeacherID</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Username</th>
+    </tr>
+    {% for data in teacherInfo %}
+      <tr>
+        <td>{{data.TeacherID}}</td>
+        <td class="name">{{data.TeacherFname}}</td>
+        <td class="name">{{data.TeacherLname}}</td>
+        <td>{{data.TeacherEmail}}</td>
+        <td>{{data.TeacherUsername}}</td>
+      </tr>
+    {% endfor %}
+  </table>
+{% endblock %}

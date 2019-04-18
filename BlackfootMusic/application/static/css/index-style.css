@@ -60,26 +60,26 @@ body{
     justify-content: center;
     align-items: center;
   }
-  
+
   .teacherButton {
    text-align: center;
   }
-  
+
   .spacer {
     height:100%;
     width:5%;
   }
-  
+
   .parent {
     align-content: center;
     justify-content: center;
     align-items: center;
   }
-  
+
   .parentButton {
    text-align: center;
   }
-  
+
   #roundedCorners{
     border-radius: 1%;
     padding: 2%;
@@ -91,13 +91,13 @@ body{
   .spacerLogout{
     width:85%;
   }
-  
+
   @media (max-width: 40em) {
   .spacerLogout {
   display: none;
   }
   }
-  
+
   @media (max-width: 40em) {
   .form-group {
   display: none;

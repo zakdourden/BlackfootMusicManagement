@@ -22,6 +22,18 @@ html{
       height:25%;
   }
 
+  .mainWrap{
+    display:flex;
+    justify-content:center; 
+  }
+
+  .flexButton{
+    display: flex;
+  }
+
+  .centerForm{
+    width:40%;
+  }
   .center-div{
     display: flex;
     align-content: center;
@@ -168,3 +180,4 @@ html{
     display: none;
     }
     }
+
