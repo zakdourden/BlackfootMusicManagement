@@ -4,7 +4,7 @@ from wtforms import Form, StringField, TextAreaField, PasswordField, validators,
 from passlib.hash import sha256_crypt
 from functools import wraps
 from application import mysql
-from application.teacherOps.forms import ParentRegisterForm, RegisterStudentForm, CreateNewInstrumentForm, RegisterTeacherForm
+from application.teacherOps.forms import ParentRegisterForm, RegisterStudentForm, RegisterTeacherForm, RegisterInstrumentForm
 ################################################################################
 # Section: Flask Configuration
 # Operations that enable flask to work.
@@ -395,3 +395,81 @@ def createTeacher():
         flash('teacher created', 'success')
         return redirect(url_for('teacher.teacherDashboard'))
     return render_template('teacher/createTeacher.html', form=form)
+################################################################################
+# Teacher: Create Instrument
+################################################################################
+@teacher.route('/createInstrument', methods=['Get','Post'])
+@is_logged_in_with_permission
+def createInstrument():
+    form = RegisterInstrumentForm(request.form)
+    if request.method == 'POST' and form.validate():
+        instrumentID = form.instrumentID.data
+        instrumentName = form.instrumentName.data.lower()
+        instrumentLost = "0"
+        instrumentCheckedOut = "0"
+        checkOutDate = "0000-00-00"
+        returnDate = "0000-00-00"
+        
+        # create cursor
+        cur = mysql.connection.cursor()
+        cur.execute("INSERT INTO instrument(InstrumentID, InstrumentName, InstrumentLost, InstrumentCheckedOut, CheckOutDate, ReturnDate) VALUES(%s,%s,%s,%s,%s,%s)", (instrumentID, instrumentName, instrumentLost, instrumentCheckedOut, checkOutDate, returnDate))
+        #%d does represent a number however it will throw an error if used with a small number.
+        #commit to finish
+        mysql.connection.commit()
+
+        #close connection
+        cur.close()
+        flash('instrument created', 'success')
+        return redirect(url_for('teacher.teacherDashboard'))
+    return render_template('teacher/createInstrument.html', form=form)
+################################################################################
+# Teacher: Edit Students
+################################################################################
+@teacher.route('/editStudent/<string:studentID>', methods=['GET', 'POST'])
+@is_logged_in_with_permission
+def editStudent(studentID):
+    # Create cursor
+    cur = mysql.connection.cursor()
+    # Get student by id
+    result = cur.execute("SELECT * FROM student WHERE StudentID = %s", [studentID])
+    student = cur.fetchone()
+    sessionStudentID = student['StudentID']
+    cur.close()
+    # Get form
+    form = RegisterStudentForm(request.form)
+
+    # Populate student from DB
+    form.studentID.data = student['StudentID']
+    form.firstName.data = student['StudentFname']
+    form.lastName.data = student['StudentLname']
+    form.gradelevel.data = student['Gradelevel_GradelevelID']
+    form.teacherID.data = student['Teacher_TeacherID']
+    form.instrumentID.data = student['Instrument_InstrumentID']
+
+    if request.method == 'POST' and form.validate():
+        studentID = request.form['studentID']
+        firstName = request.form['firstName']
+        lastName = request.form['lastName']
+        gradelevel = request.form['gradelevel']
+        teacherID = request.form['teacherID']
+        instrumentID = request.form['instrumentID']
+
+        # Create Cursor
+        cur = mysql.connection.cursor()
+        # Execute
+        cur.execute ("""
+        UPDATE student
+        SET StudentID=%s, StudentFname=%s, StudentLname=%s, Gradelevel_GradelevelID=%s, Teacher_TeacherID=%s, Instrument_InstrumentID=%s
+        WHERE StudentID=%s
+        """, (studentID, firstName, lastName, gradelevel, teacherID, instrumentID, sessionStudentID))
+        # Commit to DB
+        mysql.connection.commit()
+
+        #Close connection
+        cur.close()
+
+        flash('Student updated', 'success')
+
+        return redirect(url_for('teacher.teacherDashboard'))
+
+    return render_template('teacher/editStudent.html', form=form)

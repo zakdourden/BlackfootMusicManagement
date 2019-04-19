@@ -22,8 +22,8 @@ class RegisterStudentForm(Form):
     studentID = IntegerField('Student ID', [validators.input_required()])
     firstName = StringField('First name', [validators.Length(min=1, max=50), validators.input_required()])
     lastName = StringField('Last name', [validators.Length(min=1, max=50), validators.input_required()])
-    gradelevel = IntegerField('Grade ID', [validators.input_required()])
-    teacherID = IntegerField('Teacher ID', [validators.input_required()])
+    gradelevel = IntegerField('Grade ID &nbsp<sup><em>valid options are 0-7</em></sup>', [validators.input_required()])
+    teacherID = IntegerField('Teacher ID &nbsp<sup><em>valid options are 0-2</em></sup>', [validators.input_required()])
     instrumentID = IntegerField('Instrument ID')
 
 class RegisterTeacherForm(Form):
@@ -38,11 +38,11 @@ class RegisterTeacherForm(Form):
     ])
     confirm = PasswordField('confirm Password')
 
-class CreateNewInstrumentForm(Form):
+class RegisterInstrumentForm(Form):
     instrumentID = StringField('Instrument ID', [validators.Length(min=1, max=50), validators.input_required()])
     instrumentName = StringField('Instrument name', [validators.Length(min=1, max=50), validators.input_required()])
     instrumentLost = BooleanField('Instrument lost?')
     instrumentCheckedOut = BooleanField('Checking out an instrument?')
-    checkOutDate = DateField('check out date',default=date.today)
+    checkOutDate = DateField('check out date &nbsp<sup><em>valid date format is YYYY-MM-DD</em></sup>',default=date.today)
     returnDate = DateField('End Date',default=date.today)
 
