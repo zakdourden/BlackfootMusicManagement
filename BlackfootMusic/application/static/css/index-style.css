@@ -8,13 +8,38 @@ body{
   /*font-family: Ubuntu;*/
   height:100vh;
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#fcfff4+0,dfe5d7+40,b3bead+100;Wax+3D+%233 */
-  background: #fcfff4; /* Old browsers */
-  background: -moz-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(top, #fcfff4 0%,#dfe5d7 40%,#b3bead 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom, #fcfff4 0%,#dfe5d7 40%,#b3bead 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfff4', endColorstr='#b3bead',GradientType=0 ); /* IE6-9 */
+  background: rgb(255,255,255); /* Old browsers */
+  background: -moz-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(225,225,225,1) 0%, rgba(225,225,225,1) 0%, rgba(225,225,225,1) 37%, rgba(241,241,241,1) 100%, rgba(246,246,246,1) 100%, rgba(241,241,241,1) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(left, rgba(255,255,255,1) 0%,rgba(225,225,225,1) 0%,rgba(225,225,225,1) 0%,rgba(225,225,225,1) 37%,rgba(241,241,241,1) 100%,rgba(246,246,246,1) 100%,rgba(241,241,241,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right, rgba(255,255,255,1) 0%,rgba(225,225,225,1) 0%,rgba(225,225,225,1) 0%,rgba(225,225,225,1) 37%,rgba(241,241,241,1) 100%,rgba(246,246,246,1) 100%,rgba(241,241,241,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f1f1f1',GradientType=1 ); /* IE6-9 */
   width: 100%;
   padding: 0px;
+
+}
+
+.Greybox{
+  width:100%;
+  height:5%;
+  background-color: darkgrey;
+  border-style: solid;
+  border-width: medium;
+}
+.span1{
+  display: flex;
+  align-content: center;
+  text-align: center;
+  font-size: 65px;
+  justify-content: center;
+  font-family: 'Times New Roman', Times, serif;
+  width:100%;
+
+}
+.centerWrap{
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
 
 }
 
@@ -34,27 +59,6 @@ body{
   align-items: center;
 }
 
-.button{
-  border-radius: 5px;
-  padding: 15px 25px;
-  font-size: 12px;
-  text-decoration: none;
-  margin: 20px;
-  color: #fff;
-  position: relative;
-  display: inline-block;
-}
-
-.purple
-{
-  background-color: #9b59b6;
-  box-shadow: 0px 5px 0px 0px #82409D;
-}
-
-.purple:hover
-{
-  background-color: #B573D0;
-}
   .teacher {
     align-content: center;
     justify-content: center;

@@ -11,9 +11,6 @@
       <th scope="colgroup">Instrument</th>
       <th scope="row">Check Out Date</th>
       <th scope="col">Retun Date</th>
-      <th scope="col">Parent First Name</th>
-      <th scope="col">Parent Last Name</th>
-      <th scope="col">Parent Email</th>
       <th scope="col">Edit</th>
       <th scope="col">Delete</th>
     </tr>
@@ -25,9 +22,6 @@
         <td>{{data.InstrumentName}}</td>
         <td>{{data.CheckOutDate}}</td>
         <td>{{data.ReturnDate}}</td>
-        <td>{{data.ParentFname}}</td>
-        <td>{{data.parentLname}}</td>
-        <td>{{data.parentEmail}}</td>
         <td><a href="editStudent/{{data.StudentID}}" class="btn btn-default pull-right">Edit</a></td>
         <td><form action="#" method="post">
             <input type="hidden" name="_method" value="DELETE">

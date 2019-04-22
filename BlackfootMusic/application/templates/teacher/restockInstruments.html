@@ -1,0 +1,22 @@
+{% extends 'teacherSideNav.html' %}
+
+{% block body %}
+<br>
+<h1>Check Out Instrument</h1>
+<br>
+<div class="mainWrap">
+<div class="spacer-left"></div>
+{% from "includes/_formhelpers.html" import render_field %}
+<form method="post" class="centerForm" action="">
+  <div class="form-group">
+    {{render_field(form.instrumentID, class_="form-control")}}
+  </div>
+  <div class=flexButton>
+    <a><input type="submit" class="btn btn-primary" value="submit"></a>
+    &nbsp;
+    <a href="{{url_for('teacher.teacherDashboard')}}" class="btn btn-danger">cancel</a>
+  </div>
+  </form>
+  <div class="spacer-right"></div>
+</div>
+  {% endblock %}

@@ -88,11 +88,11 @@ def teacherDashboard():
 @is_logged_in_with_permission
 def teacherDashboardSortk():
     cur = mysql.connection.cursor()
-    result = cur.execute("SELECT *FROM student s JOIN instrument i ON s.Instrument_InstrumentID = i.InstrumentID JOIN gradelevel g ON s.Gradelevel_GradelevelID = g.GradelevelID JOIN teacher t ON s.Teacher_TeacherID = t.TeacherID JOIN parentstudent ps on ps.Student_StudentID  = s. StudentID JOIN parent q ON ps.Parent_ParentID = q.ParentID WHERE g.gradelevel ='kindergarten';")
+    result = cur.execute("SELECT *FROM student s JOIN instrument i ON s.Instrument_InstrumentID = i.InstrumentID JOIN gradelevel g ON s.Gradelevel_GradelevelID = g.GradelevelID JOIN teacher t ON s.Teacher_TeacherID = t.TeacherID WHERE g.gradelevel ='kindergarten';")
     studentInfo = cur.fetchall()
 
     if result > 0:
-        return render_template('teacher/teacherDashboard.html', studentInfo=studentInfo)
+        return render_template('teacher/sorts.html', studentInfo=studentInfo)
     else:
         message = 'No db entries found Found'
         return render_template('teacher/teacherDashboard.html', message=message)
@@ -104,11 +104,11 @@ def teacherDashboardSortk():
 @is_logged_in_with_permission
 def teacherDashboardSort1():
     cur = mysql.connection.cursor()
-    result = cur.execute("SELECT *FROM student s JOIN instrument i ON s.Instrument_InstrumentID = i.InstrumentID JOIN gradelevel g ON s.Gradelevel_GradelevelID = g.GradelevelID JOIN teacher t ON s.Teacher_TeacherID = t.TeacherID JOIN parentstudent ps on ps.Student_StudentID  = s. StudentID JOIN parent q ON ps.Parent_ParentID = q.ParentID WHERE g.gradelevel ='first';")
+    result = cur.execute("SELECT *FROM student s JOIN instrument i ON s.Instrument_InstrumentID = i.InstrumentID JOIN gradelevel g ON s.Gradelevel_GradelevelID = g.GradelevelID JOIN teacher t ON s.Teacher_TeacherID = t.TeacherID WHERE g.gradelevel ='first';")
     studentInfo = cur.fetchall()
 
     if result > 0:
-        return render_template('teacher/teacherDashboard.html', studentInfo=studentInfo)
+        return render_template('teacher/sorts.html', studentInfo=studentInfo)
     else:
         message = 'No db entries found Found'
         return render_template('teacher/teacherDashboard.html', message=message)
@@ -120,11 +120,11 @@ def teacherDashboardSort1():
 @teacher.route('/teacherDashboardSort2')
 def teacherDashboardSort2():
     cur = mysql.connection.cursor()
-    result = cur.execute("SELECT *FROM student s JOIN instrument i ON s.Instrument_InstrumentID = i.InstrumentID JOIN gradelevel g ON s.Gradelevel_GradelevelID = g.GradelevelID JOIN teacher t ON s.Teacher_TeacherID = t.TeacherID JOIN parentstudent ps on ps.Student_StudentID  = s. StudentID JOIN parent q ON ps.Parent_ParentID = q.ParentID WHERE g.gradelevel ='second';")
+    result = cur.execute("SELECT *FROM student s JOIN instrument i ON s.Instrument_InstrumentID = i.InstrumentID JOIN gradelevel g ON s.Gradelevel_GradelevelID = g.GradelevelID JOIN teacher t ON s.Teacher_TeacherID = t.TeacherID WHERE g.gradelevel ='second';")
     studentInfo = cur.fetchall()
 
     if result > 0:
-        return render_template('teacher/teacherDashboard.html', studentInfo=studentInfo)
+        return render_template('teacher/sorts.html', studentInfo=studentInfo)
     else:
         message = 'No db entries found Found'
         return render_template('teacher/teacherDashboard.html', message=message)
@@ -136,11 +136,11 @@ def teacherDashboardSort2():
 @teacher.route('/teacherDashboardSort3')
 def teacherDashboardSort3():
     cur = mysql.connection.cursor()
-    result = cur.execute("SELECT *FROM student s JOIN instrument i ON s.Instrument_InstrumentID = i.InstrumentID JOIN gradelevel g ON s.Gradelevel_GradelevelID = g.GradelevelID JOIN teacher t ON s.Teacher_TeacherID = t.TeacherID JOIN parentstudent ps on ps.Student_StudentID  = s. StudentID JOIN parent q ON ps.Parent_ParentID = q.ParentID WHERE g.gradelevel ='third';")
+    result = cur.execute("SELECT *FROM student s JOIN instrument i ON s.Instrument_InstrumentID = i.InstrumentID JOIN gradelevel g ON s.Gradelevel_GradelevelID = g.GradelevelID JOIN teacher t ON s.Teacher_TeacherID = t.TeacherID WHERE g.gradelevel ='third';")
     studentInfo = cur.fetchall()
 
     if result > 0:
-        return render_template('teacher/teacherDashboard.html', studentInfo=studentInfo)
+        return render_template('teacher/sorts.html', studentInfo=studentInfo)
     else:
         message = 'No db entries found Found'
         return render_template('teacher/teacherDashboard.html', message=message)
@@ -152,11 +152,11 @@ def teacherDashboardSort3():
 @teacher.route('/teacherDashboardSort4')
 def teacherDashboardSort4():
     cur = mysql.connection.cursor()
-    result = cur.execute("SELECT *FROM student s JOIN instrument i ON s.Instrument_InstrumentID = i.InstrumentID JOIN gradelevel g ON s.Gradelevel_GradelevelID = g.GradelevelID JOIN teacher t ON s.Teacher_TeacherID = t.TeacherID JOIN parentstudent ps on ps.Student_StudentID  = s. StudentID JOIN parent q ON ps.Parent_ParentID = q.ParentID WHERE g.gradelevel ='fourth';")
+    result = cur.execute("SELECT *FROM student s JOIN instrument i ON s.Instrument_InstrumentID = i.InstrumentID JOIN gradelevel g ON s.Gradelevel_GradelevelID = g.GradelevelID JOIN teacher t ON s.Teacher_TeacherID = t.TeacherID WHERE g.gradelevel ='fourth';")
     studentInfo = cur.fetchall()
 
     if result > 0:
-        return render_template('teacher/teacherDashboard.html', studentInfo=studentInfo)
+        return render_template('teacher/sorts.html', studentInfo=studentInfo)
     else:
         message = 'No db entries found Found'
         return render_template('teacher/teacherDashboard.html', message=message)
@@ -168,27 +168,27 @@ def teacherDashboardSort4():
 @teacher.route('/teacherDashboardSort5')
 def teacherDashboardSort5():
     cur = mysql.connection.cursor()
-    result = cur.execute("SELECT *FROM student s JOIN instrument i ON s.Instrument_InstrumentID = i.InstrumentID JOIN gradelevel g ON s.Gradelevel_GradelevelID = g.GradelevelID JOIN teacher t ON s.Teacher_TeacherID = t.TeacherID JOIN parentstudent ps on ps.Student_StudentID  = s. StudentID JOIN parent q ON ps.Parent_ParentID = q.ParentID WHERE g.gradelevel ='fifth';")
+    result = cur.execute("SELECT *FROM student s JOIN instrument i ON s.Instrument_InstrumentID = i.InstrumentID JOIN gradelevel g ON s.Gradelevel_GradelevelID = g.GradelevelID JOIN teacher t ON s.Teacher_TeacherID = t.TeacherID WHERE g.gradelevel ='fifth';")
     studentInfo = cur.fetchall()
 
     if result > 0:
-        return render_template('teacher/teacherDashboard.html', studentInfo=studentInfo)
+        return render_template('teacher/sorts.html', studentInfo=studentInfo)
     else:
         message = 'No db entries found Found'
         return render_template('teacher/teacherDashboard.html', message=message)
     # Close connection
     cur.close()
-    return('teacher/teacherDashboard.html')    
+    return('teacher/teacherDashboard.html') 
 
 @is_logged_in_with_permission
 @teacher.route('/teacherDashboardSort6')
 def teacherDashboardSort6():
     cur = mysql.connection.cursor()
-    result = cur.execute("SELECT *FROM student s JOIN instrument i ON s.Instrument_InstrumentID = i.InstrumentID JOIN gradelevel g ON s.Gradelevel_GradelevelID = g.GradelevelID JOIN teacher t ON s.Teacher_TeacherID = t.TeacherID JOIN parentstudent ps on ps.Student_StudentID  = s. StudentID JOIN parent q ON ps.Parent_ParentID = q.ParentID WHERE g.gradelevel ='sixith';")
+    result = cur.execute("SELECT *FROM student s JOIN instrument i ON s.Instrument_InstrumentID = i.InstrumentID JOIN gradelevel g ON s.Gradelevel_GradelevelID = g.GradelevelID JOIN teacher t ON s.Teacher_TeacherID = t.TeacherID WHERE g.gradelevel ='sixth';")
     studentInfo = cur.fetchall()
 
     if result > 0:
-        return render_template('teacher/teacherDashboard.html', studentInfo=studentInfo)
+        return render_template('teacher/sorts.html', studentInfo=studentInfo)
     else:
         message = 'No db entries found Found'
         return render_template('teacher/teacherDashboard.html', message=message)
@@ -200,7 +200,7 @@ def teacherDashboardSort6():
 @teacher.route('/teacherDashboardCheckInventory')
 def teacherDashboardCheckInventory():
     cur = mysql.connection.cursor()
-    result = cur.execute("SELECT * FROM instrument i LEFT OUTER JOIN student s ON s.studentID = i.instrumentID;")
+    result = cur.execute("SELECT * FROM instrument i LEFT OUTER JOIN student s ON s.Instrument_InstrumentID = i.instrumentID;")
     instrumentInfo = cur.fetchall()
     if result > 0:
         return render_template('teacher/instrumentInventory.html', instrumentInfo=instrumentInfo)
@@ -230,11 +230,11 @@ def teacherDashboardCheckParent():
 @teacher.route('/teacherDashboardSortDueDate')
 def teacherDashboardDueDate():
     cur = mysql.connection.cursor()
-    result = cur.execute("SELECT * FROM student s JOIN instrument i ON s.Instrument_InstrumentID = i.InstrumentID JOIN parentstudent ps on ps.Student_StudentID = s. StudentID JOIN parent t ON ps.Parent_ParentID = t.ParentID order by ReturnDate ASC;")
+    result = cur.execute("SELECT * FROM student s JOIN instrument i ON s.Instrument_InstrumentID = i.InstrumentID WHERE i.instrumentID != 5000 order by ReturnDate ASC;")
     studentInfo = cur.fetchall()
 
     if result > 0:
-        return render_template('teacher/teacherDashboard.html', studentInfo=studentInfo)
+        return render_template('teacher/sorts.html', studentInfo=studentInfo)
     else:
         message = 'No db entries found Found'
         return render_template('teacher/teacherDashboard.html', message=message)
@@ -246,11 +246,11 @@ def teacherDashboardDueDate():
 @teacher.route('/teacherDashboardSortRecent')
 def teacherDashboardSortRecent():
     cur = mysql.connection.cursor()
-    result = cur.execute("SELECT * FROM student s JOIN instrument i ON s.Instrument_InstrumentID = i.InstrumentID JOIN parentstudent ps on ps.Student_StudentID = s. StudentID JOIN parent t ON ps.Parent_ParentID = t.ParentID order by ReturnDate DESC;")
+    result = cur.execute("SELECT * FROM student s JOIN instrument i ON s.Instrument_InstrumentID = i.InstrumentID WHERE i.instrumentID != 5000 order by ReturnDate DESC;")
     studentInfo = cur.fetchall()
 
     if result > 0:
-        return render_template('teacher/teacherDashboard.html', studentInfo=studentInfo)
+        return render_template('teacher/sorts.html', studentInfo=studentInfo)
     else:
         message = 'No db entries found Found'
         return render_template('teacher/teacherDashboard.html', message=message)
@@ -581,3 +581,58 @@ def assignInstruments(studentID):
         flash('Instrument Checked Out', 'success')
         return redirect(url_for('teacher.teacherDashboard'))
     return render_template('teacher/assignInstruments.html', form=form)
+################################################################################
+# Teacher: Return Instrument
+################################################################################
+@teacher.route('/returnInstrument', methods=['Get','Post'])
+@is_logged_in_with_permission
+def returnInstrument():
+    cur = mysql.connection.cursor()
+    result = cur.execute("SELECT * FROM student LEFT JOIN instrument ON student.Instrument_InstrumentID = instrument.InstrumentID WHERE student.Instrument_InstrumentID != 5000;")
+    studentInfo = cur.fetchall()
+    if result > 0:
+        return render_template('teacher/returnInstrument.html', studentInfo=studentInfo)
+    else:
+        message = 'No db entries found Found'
+        return render_template('teacher/teacherDashboard.html', message=message)
+    # Close connection
+    cur.close()
+    return('teacher/teacherDashboard.html')
+################################################################################
+# Teacher: DB updates the checkout
+################################################################################
+@teacher.route('/restockInstruments/<string:studentID>', methods=['Get','Post'])
+@is_logged_in_with_permission
+def restockInstruments(studentID):
+    # Create cursor
+    cur = mysql.connection.cursor()
+    # Get student by id
+    result = cur.execute("SELECT * FROM student WHERE StudentID = %s", [studentID])
+    student = cur.fetchone()
+    sessionStudentID = student['StudentID']
+    # Get form
+    form = RegisterInstrumentForm(request.form)
+
+    if request.method == 'POST':
+        instrumentID = request.form['instrumentID']
+
+        checkForInstrument = cur.execute("SELECT * FROM instrument WHERE InstrumentID = %s", [instrumentID])
+        if checkForInstrument > 0:
+             cur.execute ("""
+            UPDATE instrument
+            SET InstrumentCheckedOut =%s, CheckOutDate =%s, ReturnDate =%s
+            WHERE InstrumentID=%s
+            """, ("0", "0000-00-00", "0000-00-00", instrumentID))
+             mysql.connection.commit()
+
+             cur.execute ("""
+            UPDATE student
+            SET Instrument_InstrumentID =%s
+            WHERE StudentID=%s
+            """, ("5000", sessionStudentID))
+             mysql.connection.commit()
+
+        cur.close()
+        flash('Instrument Returned', 'success')
+        return redirect(url_for('teacher.teacherDashboard'))
+    return render_template('teacher/restockInstruments.html', form=form)

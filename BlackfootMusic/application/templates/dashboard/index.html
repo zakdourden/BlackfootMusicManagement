@@ -1,25 +1,30 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-<br/>
-<br/>
-<div style="background-color:#303133 !important; border-radius: 120px;" class="jumbotron text-center">
-<h1 style="color: white;"> Blackfoot school district music department</h1>
-<p class="lead" style="color: yellow";>Welcome to Blackfoot elementaries music management system</p>
+<br>
+<br>
+<div style="background-color:bg-success !important; border-radius: 80px;" class="jumbotron text-center bg-dark">
+<span class="span1"><h1 style="color: white";>Blackfoot School District #55</h1></span>
+<p class="lead" style="color: white";>Blackfoot School Music Management system</p>
 </div>
 <div class="center-div">
 <div class="teacher">
 <p>If you are a teacher please click this button</p>
 <div class="teacherButton">
-  <a type="button" href="{{ url_for('teacher.teacherLogin') }}" class="btn btn-primary">Teacher login</a>
+  <a type="button" href="{{ url_for('teacher.teacherLogin') }}" class="btn btn-success">Teacher login</a>
 </div>
 </div>
 <div class="spacer"></div>
 <div class="parent">
 <p>If you are a parent please click this button</p>
 <div class ="parentButton">
-<a type="button" href="{{ url_for('parent.parentLogin') }}" class="btn btn-primary">Parent login</a>
+<a type="button" href="{{ url_for('parent.parentLogin') }}" class="btn btn-success">Parent login</a>
 </div>
 </div>
+</div>
+<br>
+<br>
+<br>
+<div class="centerWrap">
 </div>
 {% endblock %}

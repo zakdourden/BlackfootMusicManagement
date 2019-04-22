@@ -37,6 +37,9 @@ app.register_blueprint(parentOps.views.parent)
 def index():
    return render_template('dashboard/index.html')
 
+@app.route('/about')
+def about():
+   return render_template('dashboard/about.html')
 
 @app.route('/logout')
 def logout():

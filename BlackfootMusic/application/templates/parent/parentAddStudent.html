@@ -9,5 +9,6 @@
     {{render_field(form.StudentID, class_="form-control")}}
   </div>
   <p><input type="submit" class="btn btn-primary" value="submit"></p>
+  <a href="{{url_for('parent.parentDashboard')}}"><input type="button" class="btn btn-danger" value="Cancel"></a>
   </form>
   {% endblock %}

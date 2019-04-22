@@ -8,23 +8,14 @@
       <th scope="col">StudentID</th>
       <th scope="col">First Name</th>
       <th scope="col">Last Name</th>
-      <th scope="col">Grade</th>
-      <th scope="col">teacher</th>
-      <th scope="col">Edit</th>
-      <th scope="col">Delete</th>
+      <th scope="col">Return Instrument</th>
     </tr>
     {% for data in studentInfo %}
       <tr>
         <td>{{data.StudentID}}</td>
         <td class="name">{{data.StudentFname}}</td>
         <td class="name">{{data.StudentLname}}</td>
-        <td>{{data.GradeLevel}}</td>
-        <td>{{data.TeacherFname}} {{data.TeacherLname}}</td>
-        <td><a href="editStudent/{{data.StudentID}}" class="btn btn-default pull-right">Edit</a></td>
-        <td><form action="#" method="post">
-            <input type="hidden" name="_method" value="DELETE">
-            <input type="submit" value="Delete" class="btn btn-danger">
-          </form></td>
+        <td><a href="restockInstruments/{{data.StudentID}}" class="btn btn-danger pull-right">Return Instrument</a></td>
       </tr>
     {% endfor %}
   </table>

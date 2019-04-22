@@ -3,7 +3,7 @@
   <h1>Dashboard <small> Welcome {{session.name}}</small></h1>
   <hr>
   <input type="text" id="myInput" onkeyup="searchBar()" placeholder=" &#x1F50D; Search for instrument names.." title="Type in a name">
-  <table id="myTable" class="table table-striped table-dark">
+  <table id="myTable" class="table table-striped table-light">
     <tr>
       <th scope="col">InstrumentID</th>
       <th scope="col">InstrumentName</th>
@@ -11,9 +11,9 @@
       <th scope="col">Instrument Return</th>
       <th scope="col">Instrument Lost</th>
       <th scope="col">Student assigned</th>
-      <th scope="col">Edit</th>
-      <th scope="col">Delete</th>
-    </tr> --
+      <!--<th scope="col">Edit</th>
+      <th scope="col">Delete</th> -->
+    </tr> 
     {% for data in instrumentInfo %}
       <tr>
         <td>{{data.InstrumentID}}</td>
@@ -22,11 +22,11 @@
         <td>{{data.ReturnDate}}</td>
         <td>{{data.InstrumentLost}}</td>
         <td>{{data.StudentFname}}&nbsp;{{data.StudentLname}}</td>
-        <td><a href="#" class="btn btn-default pull-right">Edit</a></td>
+        <!--<td><a href="#" class="btn btn-default pull-right">Edit</a></td>
         <td><form action="#" method="post">
             <input type="hidden" name="_method" value="DELETE">
             <input type="submit" value="Delete" class="btn btn-danger">
-          </form></td>
+          </form></td> -->
       </tr>
     {% endfor %}
   </table>
