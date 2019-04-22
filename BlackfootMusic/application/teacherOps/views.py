@@ -473,3 +473,111 @@ def editStudent(studentID):
         return redirect(url_for('teacher.teacherDashboard'))
 
     return render_template('teacher/editStudent.html', form=form)
+################################################################################
+# Teacher: Edit Parents
+################################################################################
+@teacher.route('/editParent/<string:parentID>', methods=['GET', 'POST'])
+@is_logged_in_with_permission
+def editParent(parentID):
+    # Create cursor
+    cur = mysql.connection.cursor()
+    # Get student by id
+    result = cur.execute("SELECT * FROM parent WHERE ParentID = %s", [parentID])
+    parent = cur.fetchone()
+    sessionParentID = parent['ParentID']
+    sessionPassword = parent['ParentPassword']
+    cur.close()
+    # Get form
+    form = ParentRegisterForm(request.form)
+
+    # Populate student from DB
+    form.parentID.data = parent['ParentID']
+    form.firstName.data = parent['ParentFname']
+    form.lastName.data = parent['parentLname']
+    form.email.data = parent['parentEmail']
+    form.username.data = parent['Parentusername']
+
+    if request.method == 'POST':
+        parentID = request.form['parentID']
+        firstName = request.form['firstName']
+        lastName = request.form['lastName']
+        email = request.form['email']
+        username = request.form['username']
+
+        #create cursor to update the rest of the database
+        cur = mysql.connection.cursor()
+        # Execute
+        cur.execute ("""
+        UPDATE parent
+        SET ParentID=%s, ParentFname=%s, parentLname=%s, parentEmail=%s, Parentusername=%s
+        WHERE ParentID=%s
+        """, (parentID, firstName, lastName, email, username, sessionParentID))
+
+         # Commit to DB
+        mysql.connection.commit()
+
+         #Close connection
+        cur.close()
+
+        flash('Parent updated', 'success')
+
+        return redirect(url_for('teacher.teacherDashboard'))
+
+    return render_template('teacher/editParent.html', form=form)
+################################################################################
+# Teacher: Checkout instruments
+################################################################################
+@teacher.route('/checkOutInstrument', methods=['Get','Post'])
+@is_logged_in_with_permission
+def checkOutInstrument():
+    cur = mysql.connection.cursor()
+    result = cur.execute("SELECT * FROM student LEFT JOIN instrument ON student.Instrument_InstrumentID = 5000 WHERE instrument.InstrumentID = 5000;")
+    studentInfo = cur.fetchall()
+    if result > 0:
+        return render_template('teacher/checkOutInstrument.html', studentInfo=studentInfo)
+    else:
+        message = 'No db entries found Found'
+        return render_template('teacher/teacherDashboard.html', message=message)
+    # Close connection
+    cur.close()
+    return('teacher/teacherDashboard.html')
+################################################################################
+# Teacher: Checkout Established
+################################################################################
+@teacher.route('/assignInstruments/<string:studentID>', methods=['Get','Post'])
+@is_logged_in_with_permission
+def assignInstruments(studentID):
+    # Create cursor
+    cur = mysql.connection.cursor()
+    # Get student by id
+    result = cur.execute("SELECT * FROM student WHERE StudentID = %s", [studentID])
+    student = cur.fetchone()
+    sessionStudentID = student['StudentID']
+    # Get form
+    form = RegisterInstrumentForm(request.form)
+
+    if request.method == 'POST':
+        instrumentID = request.form['instrumentID']
+        checkOutDate = request.form['checkOutDate']
+        returnDate = request.form['returnDate']
+
+        checkForInstrument = cur.execute("SELECT * FROM instrument WHERE InstrumentID = %s", [instrumentID])
+        if checkForInstrument > 0:
+             cur.execute ("""
+            UPDATE instrument
+            SET InstrumentCheckedOut =%s, CheckOutDate =%s, ReturnDate =%s
+            WHERE InstrumentID=%s
+            """, ("1", checkOutDate, returnDate, instrumentID))
+             mysql.connection.commit()
+
+             cur.execute ("""
+            UPDATE student
+            SET Instrument_InstrumentID =%s
+            WHERE StudentID=%s
+            """, (instrumentID, sessionStudentID))
+             mysql.connection.commit()
+
+        cur.close()
+        flash('Instrument Checked Out', 'success')
+        return redirect(url_for('teacher.teacherDashboard'))
+    return render_template('teacher/assignInstruments.html', form=form)

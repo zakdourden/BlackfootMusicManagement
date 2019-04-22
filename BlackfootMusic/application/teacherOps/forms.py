@@ -44,5 +44,5 @@ class RegisterInstrumentForm(Form):
     instrumentLost = BooleanField('Instrument lost?')
     instrumentCheckedOut = BooleanField('Checking out an instrument?')
     checkOutDate = DateField('check out date &nbsp<sup><em>valid date format is YYYY-MM-DD</em></sup>',default=date.today)
-    returnDate = DateField('End Date',default=date.today)
+    returnDate = DateField('End Date &nbsp<sup><em>valid date format is YYYY-MM-DD</em></sup>',default=date.today)
 
