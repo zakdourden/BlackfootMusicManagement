@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-</head>
-<body>
+{% extends 'layout.html' %}
+
+{% block body %}
     <div class="container">
         <h1 class="text-center">About</h1>
         <h3 class="text-center">This page provides instructions of typical actions performed by users</h3>
@@ -26,21 +19,21 @@
 
         <ul class="list-group">
             <li class="list-group-item disabled"><h4>Begin by going to the home page</h4></li>
-            <img class="card-img-top" height="400px" width="100%" src="images/teacher/bfsd-home-screenshot.PNG" alt="Home page">
+            <img class="card-img-top" height="400px" width="100%" src="{{ url_for('static',filename='images/teacher/bfsd-home-screenshot.PNG')}}" alt="Home page">
         </ul>
 
         <br>
 
         <ul class="list-group">
             <li class="list-group-item disabled"><h4>Select the Teacher Login button to be taken to a login screen</h4></li>
-            <img class="card-img-top" height="400px" width="100%" src="images/teacher/teacher-login.PNG" alt="Teacher login page">
+            <img class="card-img-top" height="400px" width="100%" src="{{ url_for('static',filename='images/teacher/teacher-login.PNG')}}" alt="Teacher login page">
         </ul>
 
         <br>
 
         <ul class="list-group">
             <li class="list-group-item disabled"><h4>After entering your credentials you will be taken to the teacher dashboard. Here is an example with dummy data</h4></li>
-            <img class="card-img-top" height="600px" width="100%" src="images/teacher/teacher-dashboard.PNG" alt="Teacher dashboard">
+            <img class="card-img-top" height="600px" width="100%" src="{{ url_for('static',filename='images/teacher/teacher-dashboard.PNG')}}" alt="Teacher dashboard">
             <li class="list-group-item disabled">Student details can be edited or deleted using the options on the right of each table row</li>
             <li class="list-group-item disabled"><h4>The green sidebar allows you to perform different actions on the displayed table, allowing you to:</h4></li>
             <li class="list-group-item disabled">order students by grade, by upcoming due dates, and recent assignments </li>
@@ -57,21 +50,21 @@
 
         <ul class="list-group">
             <li class="list-group-item disabled"><h4>Begin by going to the home page</h4></li>
-            <img class="card-img-top" height="400px" width="100%" src="images/teacher/bfsd-home-screenshot.PNG" alt="Home screen">
+            <img class="card-img-top" height="400px" width="100%" src="{{ url_for('static',filename='images/teacher/bfsd-home-screenshot.PNG')}}" alt="Home screen">
         </ul>
 
         <br>
 
         <ul class="list-group">
             <li class="list-group-item disabled"><h4>Select the Parent Login button to be taken to a login screen</h4></li>
-            <img class="card-img-top" height="400px" width="100%" src="images/teacher/teacher-login.PNG" alt="Parent and student login page">
+            <img class="card-img-top" height="400px" width="100%" src="{{ url_for('static',filename='images/teacher/teacher-login.PNG')}}" alt="Parent and student login page">
         </ul>
 
         <br>
 
         <ul class="list-group">
             <li class="list-group-item disabled"><h4>After entering your credentials you will be taken to the student and parent dashboard. Here is an example with dummy data</h4></li>
-            <img class="card-img-top" height="400px" width="100%" src="images/student/student-dashboard.PNG" alt="Parent and student dashboard">
+            <img class="card-img-top" height="400px" width="100%" src="{{ url_for('static',filename='images/student/student-dashboard.PNG')}}" alt="Parent and student dashboard">
             <li class="list-group-item disabled">Here, parents can see their children's information including what instrument was checked out and when the return day is</li>
             <li class="list-group-item disabled">Parents also have the option of adding another one of their children</li>
         </ul>
@@ -79,5 +72,4 @@
         <br>
 
     </div>
-</body>
-</html>
+    {% endblock %}

@@ -143,4 +143,34 @@ def parentAddStudent():
             flash('No student was found with id ' + str(StudentID))
             return render_template('parent/parentDashboard.html')
     return render_template('parent/parentAddStudent.html', form=form)
-    
+###############################################################################
+# Parent: Reset Password.
+###############################################################################
+@parent.route('/parentResetPassword/<string:parentID>', methods=['Get','Post'])
+def parentResetPassword(parentID):
+    form = ParentRegisterForm(request.form)
+    if request.method == 'POST':
+        password = form.password.data
+        confirm = form.confirm.data
+
+        # create cursor
+        cur = mysql.connection.cursor()
+
+        if password == confirm:
+            cur.execute("""
+            UPDATE parent
+            SET ParentPassword=%s
+            WHERE ParentID=%s
+            """, (sha256_crypt.encrypt(str(password)), parentID))
+        else:
+            flash('Passwords must match','danger')
+            return redirect(url_for('parent.parentDashboard'))
+
+           
+        #commit to finish
+        mysql.connection.commit()
+        #close connection
+        cur.close()
+        flash('Password has been changed', 'success')
+        return redirect(url_for('parent.parentDashboard'))
+    return render_template('parent/parentResetPassword.html', form=form)

@@ -355,7 +355,7 @@ def createStudent():
 
         #close connection
         cur.close()
-        flash('student created', 'success')
+        flash('Student created', 'success')
         return redirect(url_for('teacher.teacherDashboard'))
     return render_template('teacher/createStudent.html', form=form)
 ################################################################################
@@ -516,6 +516,15 @@ def editParent(parentID):
          # Commit to DB
         mysql.connection.commit()
 
+        teacherPasswordOverride = request.form['teacherPasswordOverride']
+        if teacherPasswordOverride:
+            cur.execute("""
+            UPDATE parent
+            SET ParentPassword=%s
+            WHERE ParentID=%s
+            """, ("$5$rounds=535000$7DHPNBXcGi8Va14R$y1yqTRK0N/cA90QDfZudBlXg66ED90nDfcCbpTfOhPD", sessionParentID))
+
+            mysql.connection.commit()
          #Close connection
         cur.close()
 
@@ -636,3 +645,54 @@ def restockInstruments(studentID):
         flash('Instrument Returned', 'success')
         return redirect(url_for('teacher.teacherDashboard'))
     return render_template('teacher/restockInstruments.html', form=form)
+################################################################################
+# Teacher: Delete Students
+################################################################################  
+@teacher.route('/deleteStudent/<string:studentID>', methods=['POST'])  
+@is_logged_in_with_permission
+def deleteStudent(studentID):
+    cur = mysql.connection.cursor()
+    result = cur.execute("SELECT * FROM student WHERE StudentID = %s", [studentID])
+    student = cur.fetchone()
+    instrumentID = student['Instrument_InstrumentID']
+    
+    checkForParent = cur.execute("SELECT * FROM parentstudent Where Student_StudentID =%s", [studentID])
+
+    if instrumentID != 5000:
+        cur.close()
+        flash('Student must return instrument before being deleted', 'danger')
+        return redirect(url_for('teacher.teacherDashboard'))
+    elif checkForParent > 0:
+        flash("Deleting Relationships between parent's and student", 'success')
+        cur.execute("DELETE FROM parentstudent WHERE Student_StudentID =%s", [studentID])
+        mysql.connection.commit()
+
+    cur.execute("DELETE FROM student WHERE StudentID =%s", [studentID])
+    mysql.connection.commit()
+    cur.close()
+    flash('Student has been deleted', 'success')
+    return redirect(url_for('teacher.teacherDashboard'))
+################################################################################
+# Teacher: Delete Parents
+################################################################################  
+@teacher.route('/deleteParent/<string:parentID>', methods=['POST'])  
+@is_logged_in_with_permission
+def deleteParent(parentID):
+    cur = mysql.connection.cursor()
+    result = cur.execute("SELECT * FROM parent WHERE ParentID = %s", [parentID])
+    parent = cur.fetchone()
+    
+    checkForStudent = cur.execute("SELECT * FROM parentstudent Where Parent_ParentID =%s", [parentID])
+
+    if checkForStudent > 0:
+        flash("Deleting Relationships between parent's and student", 'success')
+        cur.execute("DELETE FROM parentstudent WHERE Parent_ParentID =%s", [parentID])
+        mysql.connection.commit()
+
+    cur.execute("DELETE FROM parent WHERE ParentID =%s", [parentID])
+    mysql.connection.commit()
+    cur.close()
+    flash('Parent has been deleted', 'success')
+    return redirect(url_for('teacher.teacherDashboard'))
+    
+

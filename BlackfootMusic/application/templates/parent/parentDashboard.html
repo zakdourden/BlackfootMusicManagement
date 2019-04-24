@@ -38,5 +38,8 @@
 <hr>
 <br>
 <a type="button" class="btn btn-primary" href="{{url_for('parent.parentAddStudent')}}">Click here to add a student +</a>
+<br>
+<br>
+<a type="button" class="btn btn-danger" href="{{url_for('parent.parentResetPassword', parentID=session.parentID)}}">Click here to if you need to change your password</a>
 
 {% endblock %}

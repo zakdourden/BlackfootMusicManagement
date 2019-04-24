@@ -17,6 +17,7 @@ class ParentRegisterForm(Form):
         validators.EqualTo('confirm', message='Passwords do not match')
     ])
     confirm = PasswordField('confirm Password')
+    teacherPasswordOverride = BooleanField('Reset parent password?<sup><em>This will set password to: 123</em></sup>')
 
 class RegisterStudentForm(Form):
     studentID = IntegerField('Student ID', [validators.input_required()])

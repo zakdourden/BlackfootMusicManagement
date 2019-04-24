@@ -23,7 +23,9 @@
     <div class="form-group">
         {{render_field(form.username, class_="form-control")}}
     </div>
-    <a href="resetParentPassword/{{parentID}}" class="btn btn-primary">Reset Password</a>
+    <div class="form-group">
+        {{render_field(form.teacherPasswordOverride, class_="form-check" )}}
+        </div>
     <div class=flexButton>
         <a><input type="submit" class="btn btn-primary" value="submit"></a>
         &nbsp;

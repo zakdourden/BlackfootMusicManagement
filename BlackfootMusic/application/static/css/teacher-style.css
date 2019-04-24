@@ -88,7 +88,7 @@ html{
     text-align: center;
     height:100%;
     color:white;
-    width:10%;
+    min-width:200px;
     background-color: #537055;
     overflow: auto;
   }
